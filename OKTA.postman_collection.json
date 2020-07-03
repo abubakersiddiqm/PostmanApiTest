@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "fb58eccf-3b6b-4ac2-ab74-087235ecedbb",
+		"name": "OKTA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createClient",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "SSWS{{apiKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_name\": \"Web client\",\r\n    \"redirect_uris\": [\r\n      \"https://httpbin.org/get\"\r\n    ],\r\n    \"response_types\": [\r\n      \"code\",\r\n      \"token\",\r\n      \"id_token\"\r\n    ],\r\n    \"grant_types\": [\r\n      \"refresh_token\",\r\n      \"authorization_code\",\r\n      \"implicit\"\r\n    ],\r\n    \"token_endpoint_auth_method\": \"client_secret_basic\",\r\n    \"application_type\": \"web\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ServerName}}/oauth2/v1/clients",
+					"protocol": "https",
+					"host": [
+						"{{ServerName}}"
+					],
+					"path": [
+						"oauth2",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getlistedClient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23afd649-7569-48a8-8639-c32b0ec0d99e",
+						"exec": [
+							"let resp=pm.response.json();\r",
+							"let clientid=resp[0].client_id\r",
+							"console.log(clientid);\r",
+							"pm.globals.set(\"clientId\", clientid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "SSWS{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{ServerName}}/oauth2/v1/clients",
+					"protocol": "https",
+					"host": [
+						"{{ServerName}}"
+					],
+					"path": [
+						"oauth2",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateclientName",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "SSWS{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"client_id\": \"{{clientId}}\",\r\n\t\"client_name\": \"Abubaker\",\r\n\t\"redirect_uris\": [\r\n\t\t\"https://httpbin.org/get\"\r\n\t],\r\n\t\"response_types\": [\r\n\t\t\"code\",\r\n\t\t\"token\",\r\n\t\t\"id_token\"\r\n\t],\r\n\t\"grant_types\": [\r\n\t\t\"refresh_token\",\r\n\t\t\"authorization_code\",\r\n\t\t\"implicit\"\r\n\t],\r\n\t\"token_endpoint_auth_method\": \"client_secret_basic\",\r\n\t\"application_type\": \"web\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{ServerName}}/oauth2/v1/clients/{{clientId}}",
+					"protocol": "https",
+					"host": [
+						"{{ServerName}}"
+					],
+					"path": [
+						"oauth2",
+						"v1",
+						"clients",
+						"{{clientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getlClientRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9396e5b2-f9c9-4e15-bfb0-a4e2eeda6ea2",
+						"exec": [
+							"let resp=pm.response.json();\r",
+							"let clientid=resp[0].client_id;\r",
+							"console.log(clientid);\r",
+							"pm.globals.set(\"clientId\", clientid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "SSWS{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{ServerName}}/oauth2/v1/clients",
+					"protocol": "https",
+					"host": [
+						"{{ServerName}}"
+					],
+					"path": [
+						"oauth2",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getlClientRequest Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b922a24f-2aed-4bf0-8438-909eb65c03c4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "SSWS{{apiKey}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{ServerName}}/oauth2/v1/clients/{{clientId}}",
+					"protocol": "https",
+					"host": [
+						"{{ServerName}}"
+					],
+					"path": [
+						"oauth2",
+						"v1",
+						"clients",
+						"{{clientId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
