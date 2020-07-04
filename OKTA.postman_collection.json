@@ -226,6 +226,29 @@
 					"response": []
 				},
 				{
+					"name": "Get Logo Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{ServerName}}/.well-known/logo",
+							"host": [
+								"{{ServerName}}"
+							],
+							"path": [
+								".well-known",
+								"logo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getlClientRequest Copy",
 					"event": [
 						{
@@ -281,11 +304,6 @@
 					"response": []
 				}
 			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "CreateApp",
-			"item": [],
 			"protocolProfileBehavior": {}
 		}
 	],
